@@ -1,0 +1,159 @@
+@coverflowWidth: 800px;
+@sideMargin: @coverflowWidth / 2 - 75px;
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+  background: #222;
+  margin-top: 200px;
+}
+
+.coverflow {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: @coverflowWidth;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -140px;
+  margin-left: -400px;
+}
+
+.wrapper {
+  width: @coverflowWidth;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-top: 40px;
+  position: absolute;
+  height: 230px;
+  .transform-style(preserve-3d);
+  .perspective(400px);
+  .perspective-origin(50%, 50%);
+  .linear-gradient(~'#414455 0%', ~',#000 40%', ~',#181818 75%');
+   border: 1px solid #000;
+ }
+
+.wrapper ul {
+  height: 220px;
+  position: relative;
+}
+
+.wrapper li:first-child {
+  margin-left: @sideMargin;
+}
+
+.wrapper li:last-child {
+  margin-right: @sideMargin;
+}
+
+.wrapper li {
+  z-index: 1;
+  position: relative;
+  width: 154px;
+  height: 154px;
+  margin:0 -50px;
+  text-align: center;
+  background: #000;
+  display: inline-block;
+  color: #000;
+  font-size: 18px;
+  -webkit-transition: -webkit-transform 0.3s @easeOutCubic 0s;
+  -moz-transition: -moz-transform 0.3s @easeOutCubic 0s;
+  -ms-transition: -ms-transform 0.3s @easeOutCubic 0s;
+  -o-transition: -o-transform 0.3s @easeOutCubic 0s;
+  transition: -transform 0.3s @easeOutCubic 0s;
+  color: #fff;
+}
+
+.wrapper li:before {
+  content: '';
+  display: block;
+  width: 154px;
+  height: 154px;
+  position: absolute;
+  top: 154px;
+  background: #181818;
+}
+
+.wrapper img {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 150px;
+  height: 150px;
+  // bugs out in recent Chrome
+  // .transition(opacity, 0.3s, ease-out, 0s);
+  -webkit-box-reflect: below -2px
+    -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(transparent),
+      color-stop(0%, transparent),
+      to(rgba(255, 255, 255, 0.3))
+    );
+  .box-shadow(-1px, 1px, 5px, fade(black, 25%));
+}
+
+.wrapper .prev img,
+.wrapper .next img {
+  opacity: 0.75;
+}
+
+.wrapper .prev {
+  .transform(translateX(-40px) rotateY(75deg) scale(0.75));
+}
+
+.wrapper .next {
+  .transform(translateX(40px) rotateY(-75deg) scale(0.75));
+}
+
+.wrapper .current {
+  .transform(translateX(0) rotateY(0deg) scale(1.0));
+}
+
+.scroller-wrapper {
+  position: absolute;
+  width: @coverflowWidth;
+  height: 250px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.scroller {
+  height: 100%;
+  display: block;
+}
+
+.scroller-wrapper::-webkit-scrollbar {
+  height: 18px;
+}
+
+.scroller-wrapper::-webkit-scrollbar-track {
+  .border-radius(18px);
+  background: fade(black, 50%);
+  border: 1px solid fade(white, 10%);
+  margin: 0 40px;
+}
+
+.scroller-wrapper::-webkit-scrollbar-thumb {
+  .border-radius(18px);
+  background: #888;
+  border: 2px solid #000;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.0, #222),
+    color-stop(0.49, #333),
+    color-stop(0.51, #444),
+    color-stop(1.0, #555)
+  );
+}

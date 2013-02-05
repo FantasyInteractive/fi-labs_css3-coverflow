@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CSS3 Coverflow (OS X like) - works in Webkit only</title>
+		<link rel="stylesheet" href="styles/css/reset.css">
+		<link rel="stylesheet" href="styles/css/styles.css">
+	</head>
+
+	<body>
+		<article class="coverflow"></article>
+
+		<script src="js/utils/requestAnimFrame.js"></script>
+		<script src="js/coverflow.js"></script>
+		<script>
+			// 50 max is sensible
+			var numItems = 50;
+			var types = [
+				'food',
+				'animals',
+				'abstract',
+				'city',
+				'nightlife',
+				'fashion',
+				'people',
+				'nature',
+				'sports',
+				'technics',
+				'transport'
+			];
+
+			for (var i = 0, markup = ''; i < numItems; i++)
+			{
+				markup += '<li><a href="#"><img data-id="' + i + '" src="http://lorempixel.com/150/150/'
+					+ types[Math.floor(Math.random() * types.length)]
+					+ '?' + Math.floor(Math.random() * 10000)
+					+ '"></a></li>';
+			}
+
+			var wrapper = document.createElement('div');
+			wrapper.classList.add('wrapper');
+			wrapper.innerHTML = '<ul>' + markup + '</ul>';
+
+			var coverflowDOM = document.querySelectorAll('.coverflow')[0];
+			coverflowDOM.appendChild(wrapper);
+			coverflow.bind(coverflowDOM);
+		</script>
+	</body>
+</html>
